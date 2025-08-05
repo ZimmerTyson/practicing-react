@@ -3,6 +3,7 @@ import React from "react";
 function App() {
 
   const [goals, setGoals] = React.useState(["item 1"]);
+  const [goal, setGoal] = React.useState("");
 
 
 
@@ -14,7 +15,7 @@ function App() {
     const updatedGoalsArray = [...goals, goal];
     console.log(updatedGoalsArray);
     setGoals(updatedGoalsArray);
-    goal = '';
+    setGoal("");
   }
 
   function deleteMe(index) {
@@ -22,6 +23,8 @@ function App() {
      if(goalsIdx !== index) return goal;
     }));
   }
+
+
 
   return (
     <>
@@ -31,6 +34,8 @@ function App() {
         <input 
           type="text" 
           id="goal"
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
         />
         <button type="submit">Add goal</button>
       </form>
@@ -46,10 +51,11 @@ function App() {
       >
         {goals.map((goal, index) => {
           return (
-      
-            <li key={index}>{goal}
-            <button style={{marginLeft: "10px", }} onClick={ () => deleteMe(index)}>Delete</button></li> 
-      
+            
+            <li key={index}>
+              <input type="checkbox" id="complete" />
+              {goal}
+              <button style={{marginLeft: "10px", }} onClick={ () => deleteMe(index)}>Delete</button></li> 
           )
           
         })}
