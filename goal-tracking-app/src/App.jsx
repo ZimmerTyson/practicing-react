@@ -2,7 +2,15 @@ import React from "react";
 
 function App() {
 
-  const [goals, setGoals] = React.useState(["item 1"]);
+  console.log("Rendering App Component");
+
+  const [goals, setGoals] = React.useState([
+    {
+      status: "incomplete",
+      text: "Item 1"
+    }
+  
+  ]);
   const [goal, setGoal] = React.useState("");
 
 
@@ -10,12 +18,21 @@ function App() {
   function addGoal(event) {
     event.preventDefault();
     console.log(event.target.goal.value);
-    let goal = event.target.goal.value;
+
+    let goal = {
+      status: "incomplete", 
+      text: event.target.goal.value
+    };
     
     const updatedGoalsArray = [...goals, goal];
     console.log(updatedGoalsArray);
-    setGoals(updatedGoalsArray);
     setGoal("");
+    setGoals(updatedGoalsArray);
+    
+  }
+
+  function toggleGoal(index) {
+    
   }
 
   function deleteMe(index) {
@@ -53,8 +70,8 @@ function App() {
           return (
             
             <li key={index}>
-              <input type="checkbox" id="complete" />
-              {goal}
+              <input type="checkbox" id="complete" onClick={toggleGoal()} />
+              {goal.text}
               <button style={{marginLeft: "10px", }} onClick={ () => deleteMe(index)}>Delete</button></li> 
           )
           
