@@ -1,8 +1,8 @@
 import React from "react";
+import {GoalForm} from "./components/GoalForm";
+import {GoalList} from "./components/GoalList";
 
 function App() {
-
-  console.log("Rendering App Component");
 
   const [goals, setGoals] = React.useState([
     {
@@ -11,7 +11,6 @@ function App() {
     }
   
   ]);
-  const [goal, setGoal] = React.useState("");
 
 
 
@@ -26,14 +25,46 @@ function App() {
     
     const updatedGoalsArray = [...goals, goal];
     console.log(updatedGoalsArray);
-    setGoal("");
     setGoals(updatedGoalsArray);
     
   }
 
   function toggleGoal(index) {
-    
+   console.log("index of gaol object to be updated:", index);
+
+  //  function callbackGoals(element, idx) {
+  //   console.log("element inside goals array:", element);
+  //   console.log("Index of goal in array:", idx);
+  //   if(index === idx) {
+
+  //     return {
+  //       status: element.status == "incomplete" ? "complete" : "incomplete", 
+  //       text: element.text,
+  //     };
+
+  //   }
+
+  //  }
+
+   const updatedGoalsArray = goals.map((element, idx) => {
+    if(index === idx) {
+      return {
+        status: element.status == "incomplete" ? "complete" : "incomplete",
+        text: element.text,
+      }
+      
+    }
+        return element;
+
+   } );
+
+
+   console.log("Updated Array: ", updatedGoalsArray);
+   setGoals(updatedGoalsArray);
   }
+
+
+
 
   function deleteMe(index) {
     setGoals(prev => prev.filter((goal, goalsIdx) => {
@@ -47,36 +78,11 @@ function App() {
     <>
       <h1>Goal Tracking App</h1>
       {/* An input to get goal from user */}
-      <form onSubmit={addGoal}>
-        <input 
-          type="text" 
-          id="goal"
-          value={goal}
-          onChange={(e) => setGoal(e.target.value)}
-        />
-        <button type="submit">Add goal</button>
-      </form>
+      <GoalForm addGoal={addGoal}/>
 
       {/* Display list of goals */}
-
-      <ul   
-        style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 5,
-        }}
-      >
-        {goals.map((goal, index) => {
-          return (
-            
-            <li key={index}>
-              <input type="checkbox" id="complete" onClick={toggleGoal()} />
-              {goal.text}
-              <button style={{marginLeft: "10px", }} onClick={ () => deleteMe(index)}>Delete</button></li> 
-          )
-          
-        })}
-      </ul>
+      <GoalList goals={goals} toggleGoal={toggleGoal} deleteMe={deleteMe}/>
+      
     </>
   );
 }
