@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.start {
+  background-color: blue;
+}
+
+.question {
+  background-color: orange;
+  width: 300px;
+  text-align: center;
+}
+
+.question > .actions {
+
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.results {
+  background-color: aqua;
+  text-align: center;
+}
