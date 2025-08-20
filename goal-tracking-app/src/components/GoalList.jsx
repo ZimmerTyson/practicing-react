@@ -1,3 +1,5 @@
+import {GoalListItem} from "./GoalListItem";
+
 export function GoalList({goals, toggleGoal, deleteMe}) {
   return (
     <ul   
@@ -9,13 +11,8 @@ export function GoalList({goals, toggleGoal, deleteMe}) {
       >
         {goals.map((goal, index) => {
           return (
+            <GoalListItem goal={goal} index={index} toggleGoal={toggleGoal} deleteMe={deleteMe} key={index} />
             
-            <li key={index}>
-            <input type="checkbox" id="complete" onClick={ () => toggleGoal(index)} />
-            <span style={{textDecoration: goal.status === "complete" ? "line-through" : "none"}}  >
-              {goal.text}
-            </span>
-            <button style={{marginLeft: "10px", }} onClick={ () => deleteMe(index)}>Delete</button></li> 
           )
           
         })}
