@@ -9,6 +9,7 @@ const ENDPOINT = "https://opentdb.com/api.php?amount=1&category=18&difficulty=ea
 function App() {
 
   const [gameState, setGameState] = useState(0);
+  const [question, setQuestion] = useState("RAM stands for Random Access Memory.");
 
   async  function fetchNextQuestion() {
     const res = await fetch(ENDPOINT);
@@ -29,7 +30,7 @@ function App() {
     <div className="container">
       <h1>Trivia App</h1>
       {gameState == 0 && <StartComponent onClick={()=> setGameState(1)} />}
-      {gameState == 1 && (<QuestionComponent onAnswerSelect={ () => setGameState(2)} question="RAM stands for Random Access Memory."/>)}
+      {gameState == 1 && (<QuestionComponent onAnswerSelect={ () => setGameState(2)} question={question}/>)}
       {gameState == 2 && <ResultsComponent result={12} resetGame={()=> setGameState(1)} />}
     </div>
   );
