@@ -8,23 +8,22 @@
 }
 
 .start {
-  background-color: blue;
+  padding: 10px;
 }
 
 .question {
-  background-color: orange;
   width: 300px;
   text-align: center;
 }
 
 .question > .actions {
-
+  padding-top: 10px;
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
 .results {
-  background-color: aqua;
+  padding: 10px;
   text-align: center;
 }
